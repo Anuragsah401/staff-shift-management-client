@@ -1,7 +1,14 @@
 import React from "react";
+import UserLayout from "components/user/UserLayout";
+import UserHeader from "components/ui/UserHeader";
 
 const user = () => {
-  return <div>hello</div>;
+  return (
+    <>
+      <UserHeader />
+      <UserLayout />
+    </>
+  );
 };
 
 export default user;
