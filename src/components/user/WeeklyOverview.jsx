@@ -1,12 +1,7 @@
 import React from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
-const WeeklyOverview = () => {
-  const weeklyData = [
-    { week: "Week 1", hours: 40 },
-    { week: "Week 2", hours: 38 },
-  ];
-
+const WeeklyOverview = ({ weeklyData }) => {
   return (
     <div className="bg-white md:p-6 rounded-lg shadow-md mb-6">
       <h2 className="text-xl font-bold text-gray-900 mb-2">Weekly Hours Overview</h2>

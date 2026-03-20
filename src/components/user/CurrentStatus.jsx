@@ -1,7 +1,7 @@
 import React from "react";
 import { Clock } from "lucide-react";
 
-const CurrentStatus = ({ checkInTime }) => {
+const CurrentStatus = ({ checkInTime, todaysShift }) => {
   return (
     <>
       <div className="flex items-center gap-3 mb-4 ">
@@ -19,7 +19,9 @@ const CurrentStatus = ({ checkInTime }) => {
         </div>
         <div>
           <p className="text-gray-600 text-sm mb-1">Today's Schedule</p>
-          <p className="text-xl font-bold text-gray-900">09:00 - 17:00</p>
+          <p className="text-xl font-bold text-gray-900">
+            {todaysShift ? todaysShift : "No shift scheduled"}
+          </p>
         </div>
       </div>
     </>

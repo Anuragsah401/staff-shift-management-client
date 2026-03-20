@@ -1,18 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { Clock, LogOut } from "lucide-react";
 
-const TimeClockButtons = ({ checkInTime, setCheckInTime, checkOutTime, setCheckOutTime }) => {
-  const handleCheckIn = () => {
-    const now = new Date();
-    setCheckInTime(now);
-    setCheckOutTime(null);
-    console.log("Check-in time:", now.toLocaleTimeString());
+const TimeClockButtons = ({ checkInTime, checkOutTime, onClockIn, onClockOut }) => {
+  const [status, setStatus] = useState(null);
+
+  const handleCheckIn = async () => {
+    setStatus(null);
+    try {
+      await onClockIn();
+      setStatus("Checked in successfully.");
+    } catch (error) {
+      console.error(error);
+      setStatus("Unable to check in.");
+    }
   };
 
-  const handleCheckOut = () => {
-    const now = new Date();
-    setCheckOutTime(now);
-    console.log("Check-out time:", now.toLocaleTimeString());
+  const handleCheckOut = async () => {
+    setStatus(null);
+    try {
+      await onClockOut();
+      setStatus("Checked out successfully.");
+    } catch (error) {
+      console.error(error);
+      setStatus("Unable to check out.");
+    }
   };
 
   return (
@@ -20,7 +31,7 @@ const TimeClockButtons = ({ checkInTime, setCheckInTime, checkOutTime, setCheckO
       <p className="text-gray-600 mb-6">Clock in and out for your shift</p>
 
       {/* Check In / Check Out Buttons */}
-      <div className="grid grid-cols-2 gap-4 mb-6">
+      <div className="grid grid-cols-2 gap-4 mb-4">
         <button
           onClick={handleCheckIn}
           disabled={checkInTime !== null}
@@ -46,6 +57,7 @@ const TimeClockButtons = ({ checkInTime, setCheckInTime, checkOutTime, setCheckO
           Check Out
         </button>
       </div>
+      {status && <p className="text-sm text-gray-600">{status}</p>}
     </>
   );
 };
